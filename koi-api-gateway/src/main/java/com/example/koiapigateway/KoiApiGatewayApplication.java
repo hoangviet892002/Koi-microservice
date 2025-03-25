@@ -16,7 +16,8 @@ public class KoiApiGatewayApplication {
 
 
     private final List<String> services = Arrays.asList(
-            "user-service"
+            "user-service",
+            "pond-service"
     );
     @Bean
     public RouteLocator deployRoutes(RouteLocatorBuilder builder) {

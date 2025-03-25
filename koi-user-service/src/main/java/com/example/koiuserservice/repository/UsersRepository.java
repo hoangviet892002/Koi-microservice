@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsersRepository  extends BaseRepository<Users, Long> {
-
+    Users findByEmail(String email);
+    Users findByUsername(String username);
 }

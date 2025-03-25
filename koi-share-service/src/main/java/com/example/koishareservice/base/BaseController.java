@@ -68,8 +68,7 @@ public class BaseController<T> {
             // advance filter
             if (params.containsKey("searchCriteria")) {
                 try {
-                    String decodedString = new String(Base64.getDecoder().decode(params.get("searchCriteria")));
-                    List<SearchCriteria> searchCriteriaParams = objectMapper.readValue(decodedString, new TypeReference<List<SearchCriteria>>() {});
+                    List<SearchCriteria> searchCriteriaParams = objectMapper.readValue(params.get("searchCriteria"), new TypeReference<List<SearchCriteria>>() {});
                     for (SearchCriteria criteria : searchCriteriaParams) {
                         builder.with(criteria);
                     }
@@ -81,8 +80,7 @@ public class BaseController<T> {
             Specification<T> searchResult = builder.build();
             if (params.containsKey("sorting")) {
                 try {
-                    String decodedString = new String(Base64.getDecoder().decode(params.get("sorting")));
-                    Sorting sortingParams = objectMapper.readValue(decodedString, Sorting.class);
+                    Sorting sortingParams = objectMapper.readValue(params.get("sorting"), Sorting.class);
                     if (sortingParams.direction.equals("ascend")) {
                         sortable = Sort.by(sortingParams.key).ascending();
                     } else {
@@ -103,8 +101,7 @@ public class BaseController<T> {
                 // sorting and paging
                 Pageable pageable;
                 try {
-                    String decodedString = new String(Base64.getDecoder().decode(params.get("paging")));
-                    Paging pagingParams = objectMapper.readValue(decodedString, Paging.class);
+                    Paging pagingParams = objectMapper.readValue(params.get("paging"), Paging.class);
                     if (sortable != null) {
                         pageable = PageRequest.of(pagingParams.pageNo, pagingParams.pageSize, sortable);
                     } else {
